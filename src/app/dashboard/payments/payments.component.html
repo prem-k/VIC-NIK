@@ -1,0 +1,86 @@
+<div class="animated fadeIn">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+         <div class="card">
+            <div class="card-header">
+               <i class="fa fa-align-justify"></i> Payments
+               <div  *ngIf="!isAdmin()" class="add-new float-right">
+                 <a [routerLink]="['add']" >
+                     <button class="btn btn-primary" type="button">Add New</button>
+                 </a>    
+               </div>                   
+            </div>
+            <div class="card-body">
+               <div class="row mb-3">
+                  <div class="col-md-{{(searchBy == 'date'?'8':'6')}} offset-md-12">
+                    <form (ngSubmit)="dataList('')" method="post" novalidate="novalidate">
+                        <div class="input-group">  
+                          <div class="margin-right-15">
+                            <select (ngModelChange)="resetSearchInputs()" [(ngModel)]="searchBy" #searchBY="ngModel" name="search_by" id="search_by" class="form-control">
+                                <option value="u_id">Search By User ID</option>
+                                <option value="bank_name">Search By Bank</option>
+                                <option value="branch_name">Search By Branch</option>
+                                <option value="ifsc_code">Search By IFSC Code</option>
+                                <option value="status">Search By Status</option>
+                                <option value="date">Search By Date</option>
+                            </select>
+                          </div> 
+                          <input *ngIf="searchBy == 'u_id'" name="search_text" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="User ID" [(ngModel)]="searchText.u_id">                         
+
+                           <input *ngIf="searchBy == 'bank_name'" name="bank_name" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Bank Name" [(ngModel)]="searchText.bank_name">
+
+                           <input *ngIf="searchBy == 'branch_name'" name="branch_name" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Branch Name" [(ngModel)]="searchText.branch_name">
+
+                           <input *ngIf="searchBy == 'ifsc_code'" name="ifsc_code" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="IFSC Code" [(ngModel)]="searchText.ifsc_code">
+
+
+                          <select *ngIf="searchBy == 'status'" [(ngModel)]="searchText.status" name="status" id="status" class="form-control margin-right-10">
+                              <option value="{{i}}" *ngFor="let data of ['Select Status','Pending','Approved']; let i = index">{{data}}</option>
+                          </select>
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.start_time">
+                          
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.end_time"> 
+                          <input type="button" class="btn btn-primary margin-right-10" name="searchData" value="Search" (click)="dataList('')">
+                        </div>
+                    </form>
+                  </div>
+               </div>
+               <table class="table table-responsive-sm table-hover table-outline mb-0">
+                  <thead>
+                     <tr>
+                        <th>User ID</th>
+                        <th>Amount</th>
+                        <th>Bank Name</th>
+                        <th>Branch</th>
+                        <th>Bank IFSC Code</th>
+                        <th>Remarks</th>                        
+                        <th>Status</th>
+                     </tr>
+                  </thead>
+                  <tbody>                     
+                     <tr *ngFor="let row of rowData | paginate: { itemsPerPage: limit, currentPage: p1, id: 'my_pagination', totalItems: total_records }">   
+                        <td>{{row.User.u_id}}</td>
+                        <td>{{row.UserPaymentRequest.amount}}</td>
+                        <td>{{row.UserBankAccount.bank_name}}</td>
+                        <td>{{row.UserBankAccount.branch_name}}</td>
+                        <td>{{row.UserBankAccount.ifsc_code}}</td>
+                        <td>{{row.UserPaymentRequest.remark}}</td>
+                        <td> 
+                            <span *ngIf="!isAdmin()" class="badge badge-{{(row.UserPaymentRequest.status == '1')?'success':'danger'}}">{{(row.UserPaymentRequest.status == '1')?'Approved':'Pending'}}</span>
+                            <select *ngIf="isAdmin()" [(ngModel)]="row.UserPaymentRequest.status" name="defaultPost_{{row.UserPaymentRequest.id}}" id="defaultPost_{{row.UserPaymentRequest.id}}" class="form-control" (change)="changeStatus(row.UserPaymentRequest.id,row.UserPaymentRequest.status)">
+                                <option value="2">Pending</option>
+                                <option value="1">Approved</option>
+                            </select>
+                        </td>  
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="float-right">
+                  <pagination-controls class="pagination" (pageChange)="onPageChange(p1 = $event)" id="my_pagination"></pagination-controls> 
+               </div>                 
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="animated fadeIn">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+         <div class="card">
+            <div class="card-header">
+               <i class="fa fa-align-justify"></i> Enquiry Register  
+               <!-- <div class="add-new float-right" (click)="addInquiry=true">
+                  <button class="btn btn-primary" type="button">Add New</button>
+               </div>  -->               
+            </div>
+            <div class="card-body">
+               <div class="row mb-3" *ngIf="isAdmin()">
+                  <div class="col-md-{{(searchBy == 'date'?'8':'6')}} offset-md-12">
+                    <form (ngSubmit)="dataList()" method="post" novalidate="novalidate">
+                        <div class="input-group">  
+                          <div class="margin-right-15">
+                            <select (ngModelChange)="resetSearchInputs()" [(ngModel)]="searchBy" #searchBY="ngModel" name="search_by" id="search_by" class="form-control">
+                                <option value="name">Search By name</option>
+                                <option value="email">Search Email</option>
+                                <option value="mobile">Search By Mobile</option>
+                                <option value="date">Search By Date</option>
+                            </select>
+                          </div> 
+                          <input *ngIf="searchBy == 'name'" name="search_text" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Name" [(ngModel)]="searchText.name">                         
+
+                           <input *ngIf="searchBy == 'email'" name="email" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Email" [(ngModel)]="searchText.email">
+
+                           <input *ngIf="searchBy == 'mobile'" name="mobile" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Mobile" [(ngModel)]="searchText.mobile">
+
+                          <select *ngIf="searchBy == 'status'" [(ngModel)]="searchText.status" name="status" id="status" class="form-control margin-right-10">
+                              <option value="{{i}}" *ngFor="let data of ['Select Status','Active','Inactive']; let i = index">{{data}}</option>
+                          </select>
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.start_time">
+                          
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.end_time"> 
+                          <input type="button" class="btn btn-primary margin-right-10" name="searchData" value="Search" (click)="dataList()">
+                        </div>
+                    </form>
+                  </div>
+               </div>
+               <table class="table table-responsive-sm table-hover table-outline mb-0">
+                  <thead>
+                     <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>mobile</th>
+                        <th>Message</th>
+                        <!-- <th>Resolve By</th>
+                        <th>Status</th> -->
+                     </tr>
+                  </thead>
+                  <tbody>                     
+                     <tr *ngFor="let row of rowData | paginate: { itemsPerPage: limit, currentPage: p1, id: 'my_pagination', totalItems: total_records }">   
+                        <td>{{row.Inquiry.name}}</td>
+                        <td>{{row.Inquiry.email}}</td>
+                        <td>{{row.Inquiry.mobile}}</td>
+                        <td>{{row.Inquiry.message}}</td>
+                       <!--  <td>{{row.Inquiry.resolve_by}}</td>
+                        <td width="120px">
+                          <span *ngIf="!isAdmin()" class="badge badge-{{(row.Inquiry.status == '1')?'success':'danger'}}">{{(row.Inquiry.status == '1')?'Approved':'Pending'}}</span>
+                          <select *ngIf="isAdmin()" [(ngModel)]="row.Inquiry.status" name="defaultInquiry_{{row.Inquiry.id}}" id="defaultInquiry_{{row.Inquiry.id}}" class="form-control" (change)="changeStatus(row.Inquiry.id,row.Inquiry.status)">
+                                <option value="1">Active</option>
+                                <option value="2">Inactive</option>
+                          </select>
+                        </td>  -->                       
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="float-right">
+                  <pagination-controls class="pagination" (pageChange)="onPageChange(p1 = $event)" id="my_pagination"></pagination-controls> 
+               </div>                 
+            </div>
+         </div>
+      </div>
+   </div>
+      
+   <div class="my-modal" tabindex="-1" *ngIf="addInquiry">
+     <div class="modal-dialog modal-lg my-modal-content" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h4 class="modal-title">Register Enquiry</h4>
+           <button type="button" class="close" (click)="cancelPopUp()" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+            <textarea id="inquiryRemark" [(ngModel)]="inquiryRemark" name="inquiryRemark" placeholder="Register Enquiry" #p="ngModel" class="form-control" required></textarea>
+            <div class="error" *ngIf="errors.inquiryRemark">{{errors.inquiryRemark}}</div>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" (click)="cancelPopUp()">Close</button>
+           <button type="button" (click)="addNewInquiry()" class="btn btn-primary">Save changes</button>
+         </div>
+       </div><!-- /.modal-content -->
+     </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
+</div>

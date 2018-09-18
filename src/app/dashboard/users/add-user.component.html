@@ -1,0 +1,206 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-note"></i>
+                    <strong>{{(id>0)?'Edit':'Add'}} User Profile</strong>
+                    <div class="float-right" *ngIf="isAdmin()">
+                        <a title="Back" [routerLink]="['/dashboard/users']">
+                            <button class="btn btn-success btn-primary">Back</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate> 
+                        <div class="form-group" *ngIf="isAdmin()">
+                            <label for="user_role" class="form-control-label">User Role</label>
+                            <select [(ngModel)]="form.user_role" name="user_role" id="user_role" class="form-control">
+                                <option value="1">Admin</option>
+                                <option value="2">User</option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group" *ngIf="isAdmin()">
+                            <label for="zero_id" class="form-control-label">Make Zero ID</label>
+                            <div class="col-md-9 col-form-label">
+                                <div class="form-check form-check-inline mr-1" id="inline-radios">
+                                    <input type="checkbox" [(ngModel)]="form.zero_id" name="zero_id" id="zero_id" class="form-check-input">{{(form.zero_id)?'Yes':'No'}}
+                                </div>
+                            </div>    
+                        </div> 
+                         <div class="form-group" *ngIf="isAdmin() && form.zero_id">
+                            <label for="zero_amount" class="form-control-label">Zero ID Amount</label>
+                            <input type="number" [(ngModel)]="form.zero_amount" name="zero_amount" id="zero_amount" placeholder="Zero ID Amount" class="form-control" #zero_amount="ngModel" required>
+                            <div *ngIf="f.submitted && zero_amount.invalid" [ngClass]="{ 'is-invalid': f.submitted && zero_amount.invalid }">
+                                <div *ngIf="zero_amount.errors.required" class="error">Zero ID Amount is required</div>
+                            </div>
+                        </div>  -->
+                        <div class="form-group" *ngIf="isAdmin()">
+                            <label for="user_role" class="form-control-label">User Rank</label>
+                            <select [disabled]="!isAdmin()" [(ngModel)]="form.designation" name="designation" id="designation"  class="form-control">
+                                <option *ngFor="let data of userPostObj" value="{{data.id}}">{{data.name}}</option>
+                            </select>
+                        </div>                      
+                        <div class="form-group" *ngIf="isAdmin()">
+                            <label for="date_of_joining" class="form-control-label">Joining Date</label>
+                            <input type="date" [(ngModel)]="form.date_of_joining" name="date_of_joining" id="date_of_joining" placeholder="Name" class="form-control" #date_of_joining="ngModel" required>
+                            <div *ngIf="f.submitted && date_of_joining.invalid" [ngClass]="{ 'is-invalid': f.submitted && date_of_joining.invalid }">
+                                <div *ngIf="date_of_joining.errors.required" class="error">Joining Date is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="u_id" class="form-control-label">User ID</label>
+                            <input [disabled]="!isAdmin()" type="text" [(ngModel)]="form.u_id" name="u_id" id="u_id" placeholder="User ID" class="form-control" #u_id="ngModel" required>
+                            <div *ngIf="f.submitted && u_id.invalid" [ngClass]="{ 'is-invalid': f.submitted && u_id.invalid }">
+                                <div *ngIf="u_id.errors.required" class="error">User ID is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-control-label">Email ID</label>
+                            <input type="text" [(ngModel)]="form.email" name="email" id="email" placeholder="Email" class="form-control" #email="ngModel" required>
+                            <div *ngIf="f.submitted && email.invalid" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }">
+                                <div *ngIf="email.errors.required" class="error">Email is required</div>
+                            </div>
+                            <div *ngIf="f.submitted && errors && errors.unique_user" class="error">This email already exist.</div>
+                        </div>
+                        <div class="form-group" *ngIf="id > 0">
+                            <label for="text_password" class="form-control-label">Password</label>
+                            <input type="text" disabled [(ngModel)]="form.text_password" name="text_password" id="text_password" placeholder="Password" class="form-control" #text_password="ngModel" required>
+                            <div *ngIf="f.submitted && text_password.invalid" [ngClass]="{ 'is-invalid': f.submitted && text_password.invalid }">     
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="isAdmin()">
+                            <label for="parent_u_id" class="form-control-label">Sponsor ID</label>
+                            <input type="text" [disabled]="!isAdmin()" [(ngModel)]="form.parent_u_id" name="parent_u_id" id="parent_u_id" placeholder="Sponsor ID" class="form-control" #parent_u_id="ngModel" required (ngModelChange)="validateSponserId(form.parent_u_id)">
+                            <div *ngIf="f.submitted && parent_u_id.invalid" [ngClass]="{ 'is-invalid': f.submitted && parent_u_id.invalid }">
+                                <div *ngIf="parent_u_id.errors.required" class="error">Sponsor ID is required</div>
+                            </div>
+                            <div *ngIf="errors.parent_u_id" class="error">{{errors.parent_u_id}}</div>
+                        </div>
+                        <div class="form-group" *ngIf="isAdmin()">
+                            <label for="sponsor_name" class="form-control-label">Sponsor name</label>
+                            <input disabled type="text" [(ngModel)]="form.sponsor_name" name="phone" id="sponsor_name" placeholder="Sponsor Name" class="form-control" #sponsor_name="ngModel" required>
+                            <div *ngIf="f.submitted && sponsor_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && sponsor_name.invalid }">
+                                <div *ngIf="sponsor_name.errors.required" class="error">Sponsor name is required</div>
+                                <div *ngIf="errors.parent_u_id" class="error">{{errors.parent_u_id}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name" class="form-control-label">Name</label>
+                            <input type="text" [(ngModel)]="form.first_name" name="first_name" id="first_name" placeholder="Name" class="form-control" #first_name="ngModel" required>
+                            <div *ngIf="f.submitted && first_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && first_name.invalid }">
+                                <div *ngIf="first_name.errors.required" class="error">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Gender</label>
+                            <div class="">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input [(ngModel)]="form.gender" name="gender" type="radio" id="inline-radio1" name="inline-radios" value="1" class="form-check-input">Male &nbsp;&nbsp;
+                                    </label>
+                                    <label for="inline-radio2" class="form-check-label ">
+                                        <input [(ngModel)]="form.gender" name="gender" type="radio" id="inline-radio2" name="inline-radios" value="2" class="form-check-input">Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pan_card" class="form-control-label">Pan Card</label>
+                            <input type="text" [(ngModel)]="form.pan_card" name="pan_card" id="pan_card" placeholder="Name" class="form-control" #pan_card="ngModel" required>
+                            <div *ngIf="f.submitted && pan_card.invalid" [ngClass]="{ 'is-invalid': f.submitted && pan_card.invalid }">
+                                <div *ngIf="pan_card.errors.required" class="error">Pan Card is required</div>
+                                <div *ngIf="errors.pan_card_number" class="error">{{errors.pan_card_number}}</div>
+                            </div>
+                        </div>                       
+                        <div class="form-group">
+                            <label for="father_name" class="form-control-label">Father's name</label>
+                            <input type="text" [(ngModel)]="form.father_name" name="father_name" id="father_name" placeholder="Father's name" class="form-control" #father_name="ngModel">
+                            <!-- <div *ngIf="f.submitted && father_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && father_name.invalid }">
+                                <div *ngIf="father_name.errors.required" class="error">Father's name is required</div>
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="date_of_birth" class="form-control-label">DOB</label>
+                            <input type="date" [(ngModel)]="form.date_of_birth" name="date_of_birth" id="date_of_birth" placeholder="Zip Code" class="form-control" #date_of_birth="ngModel" required>
+                            <div *ngIf="f.submitted && date_of_birth.invalid" [ngClass]="{ 'is-invalid': f.submitted && date_of_birth.invalid }">
+                                <div *ngIf="date_of_birth.errors.required" class="error">D.O.B is required</div>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="mobile_number" class="form-control-label">Mobile</label>
+                            <input type="number" [(ngModel)]="form.mobile_number" name="mobile_number" id="mobile_number" placeholder="Mobile" class="form-control" #mobile_number="ngModel" required>
+                            <div *ngIf="f.submitted && mobile_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && mobile_number.invalid }">
+                                <div *ngIf="mobile_number.errors.required" class="error">Mobile is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="form-control-label">Address</label>
+                            <textarea id="address" [(ngModel)]="form.address" name="address" placeholder="Address" class="form-control" #address="ngModel" required></textarea>
+                            <div *ngIf="f.submitted && address.invalid" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }">
+                                <div *ngIf="address.errors.required" class="error">Address is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state_id" class="form-control-label">State</label>
+                            <select [(ngModel)]="form.state_id" name="state_id" id="state_id" class="form-control" (change)="getCities(form.state_id)">
+                                <option value="0">Select State</option>
+                                <option value="{{state.State.id}}" *ngFor="let state of formList.stateList">{{state.State.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city_id" class="form-control-label">City</label>
+                            <select [(ngModel)]="form.city_id" name="city_id" id="city_id" class="form-control">
+                                <option value="0">Select City</option>
+                                <option value="{{city.City.id}}" *ngFor="let city of formList.cityList">{{city.City.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip_code" class="form-control-label">Pin Code</label>
+                            <input type="text" [(ngModel)]="form.zip_code" name="zip_code" id="zip_code" placeholder="Pin Code" class="form-control" #zip_code="ngModel" required>
+                            <div *ngIf="f.submitted && zip_code.invalid" [ngClass]="{ 'is-invalid': f.submitted && zip_code.invalid }">
+                                <div *ngIf="zip_code.errors.required" class="error">Pin Code is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="isAdmin()">
+                            <label for="status" class="form-control-label">Status</label>
+                            <select [(ngModel)]="form.status" name="status" id="status" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="2">Inactive</option>
+                            </select>
+                        </div>                        
+                        <div class="card-footer">
+                            <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="my-modal" tabindex="-1" *ngIf="showPopup">
+      <div class="modal-dialog modal-lg my-modal-content" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <form name="mform" method="post" #ot="ngForm" (ngSubmit)="ot.form.valid && saveData()" novalidate> 
+            <h4 class="modal-title" style="margin-bottom:12px;">Verify OTP</h4>
+            <div class="form-group">
+                <input type="text" [(ngModel)]="form.otp" name="otp" id="otp" placeholder="OTP" class="form-control" #otp="ngModel" required>
+                <div *ngIf="ot.submitted && otp.invalid" [ngClass]="{ 'is-invalid': ot.submitted && otp.invalid }">
+                    <div *ngIf="otp.errors.required" class="error">OTP is required</div>                    
+                </div>
+                <div *ngIf="errors.otp_check" class="error">{{errors.otp_check}}</div>
+            </div>
+            <div class="modal-body" style="text-align: left;padding: 0;">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Verify</button>
+                 &nbsp;&nbsp; <button type="button" class="btn btn-primary" (click)="resendSaveDataFn()"><i class="fa fa-dot-circle-o"></i> Re-Send</button>
+            </div>
+            </form>
+            <button type="button" class="close" (click)="showPopup = false" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>          
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

@@ -1,0 +1,46 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-note"></i>
+                    <strong>{{(id>0)?'Edit':'Add'}} News</strong>
+                    <div class="float-right">
+                        <a title="Back" [routerLink]="['/dashboard/news']">
+                            <button class="btn btn-success btn-primary">Back</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate>
+                        <div class="form-group">
+                            <label for="type" class="form-control-label">Category</label>
+                            <select [(ngModel)]="form.type" name="type" id="type" class="form-control">
+                                <option value="1">News</option>
+                                <option value="2">Event</option>
+                            </select>
+                        </div> 
+                        <div class="form-group">
+                            <label for="title" class="form-control-label">Title</label>
+                            <input type="text" [(ngModel)]="form.title" name="title" id="name" placeholder="Name" class="form-control" #title="ngModel" required>
+                            <div *ngIf="f.submitted && title.invalid" [ngClass]="{ 'is-invalid': f.submitted && title.invalid }">
+                                <div *ngIf="title.errors.required" class="error">Title is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="form-control-label">Description</label>
+                            <textarea id="description" style="margin-top: 0px; margin-bottom: 0px; height: 233px;" [(ngModel)]="form.description" name="description" placeholder="Description" class="form-control" #description="ngModel" required></textarea>
+                            <div *ngIf="f.submitted && description.invalid" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }">
+                                <div *ngIf="description.errors.required" class="error">Description is required</div>
+                            </div>
+                        </div>                                               
+                        <div class="card-footer">
+                            <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<app-header
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 89, height: 50, alt: 'Victory Led'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/logo.png', width: 30, height: 30, alt: 'Victory Led'}"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="false" 
+  [mobileAsideMenuToggler]="false">
+  <ul class="nav navbar-nav d-md-down-none">
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown login-text">Logged in as : <b>{{logginAs()}}</b></li>
+  </ul>
+</app-header>
+<div class="back-image app-body">
+  <app-sidebar [fixed]="true" [display]="'lg'">
+    <app-sidebar-nav [navItems]="navItem" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+      <app-breadcrumb></app-breadcrumb>
+      <!-- Breadcrumb Menu-->
+      <li class="breadcrumb-menu">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <!-- <a class="btn" href="#"><i class="icon-speech"></i></a> -->
+          <a class="btn" [routerLink]="['/dashboard/change-password']"><i class="icon-graph d-md-down-none"></i> &nbsp;Change Password</a>
+          <a class="btn" href="#/dashboard/login?logout=true"><i class="icon-settings d-md-down-none"></i> &nbsp;Log Out</a>
+        </div>
+      </li>
+    </ol>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+</div>
+
+<div class="my-modal" tabindex="-1" *ngIf="showPopup" >
+  <div class="modal-dialog modal-md my-modal-content" role="document" style="padding: 0 !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h4 class="modal-title">{{popupData.title}}</h4> -->
+        <button type="button" class="close" (click)="showPopup = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 0 !important">
+        <img src="{{popupData.image_path}}" width="497">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- <app-footer>  
+  <span class="ml-auto">Powered by <a href="http://victoryled.in">Victory LED</a></span>
+</app-footer> -->

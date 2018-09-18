@@ -1,0 +1,115 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-note"></i>
+                    <strong>{{(id>0)?'Edit':'Add'}} Purchase Request</strong>
+                    <div class="float-right">
+                        <a title="Back" [routerLink]="['/dashboard/products/purchase-request']">
+                            <button class="btn btn-success btn-primary">Back</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate>
+                        <div class="form-group">
+                            <label for="product_id" class="form-control-label">Products</label>
+                            <select [(ngModel)]="form.product_id" #product_name="ngModel" name="product_id" id="product_id" class="form-control" required>
+                                <option value="">Select Product</option>
+                                <option [ngValue]="data.Product.id" *ngFor="let data of productsList">{{data.Product.name}}</option>
+                            </select>
+                            <div *ngIf="f.submitted && product_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && product_name.invalid }">
+                                <div *ngIf="product_name.errors.required" class="error">Product is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pan_card_number" class="form-control-label">Date of Deposit</label>
+                            <input type="date" [(ngModel)]="form.date_of_deposit" name="date_of_deposit" id="name" placeholder="Date of Deposit" class="form-control" #date_of_deposit="ngModel" required>
+                            <div *ngIf="f.submitted && date_of_deposit.invalid" [ngClass]="{ 'is-invalid': f.submitted && date_of_deposit.invalid }">
+                                <div *ngIf="date_of_deposit.errors.required" class="error">Date of Deposit is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Receipt Image</label>
+                            <input class="form-control" type="file" (change)="onFileChanged($event)" #fileInput accept="image/x-png,image/gif,image/jpeg">
+                            <div *ngIf="errors.receipt_image" class="error">{{errors.receipt_image}}</div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="payment_mode" class="form-control-label">Mode of Transfer</label>
+                            <select class="form-control" name="payment_mode" id="payment_mode" #modeTransfer="ngModel" [(ngModel)]="form.payment_mode" required>
+                                <option value="1">NEFT</option>
+                                <option value="2">RTGS </option>
+                                <option value="3">IMPS </option>
+                                <option value="4">Cheque Deposit </option>
+                            </select>
+                            <div *ngIf="f.submitted && modeTransfer.invalid" [ngClass]="{ 'is-invalid': f.submitted && modeTransfer.invalid }">
+                                <div *ngIf="modeTransfer.errors.required" class="error">Mode of Transfer is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="grand_total" class="form-control-label">Amount</label>
+                            <input type="text" [(ngModel)]="form.grand_total" name="grand_total" id="name" placeholder="Amount" class="form-control" #grand_total="ngModel" required>
+                            <div *ngIf="f.submitted && grand_total.invalid" [ngClass]="{ 'is-invalid': f.submitted && grand_total.invalid }">
+                                <div *ngIf="grand_total.errors.required" class="error">Amount is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bank_name" class="form-control-label">Bank Name</label>
+                            <input type="text" [(ngModel)]="form.bank_name" name="bank_name" id="bank_name" placeholder="Bank Name" class="form-control" #bank_name="ngModel" required>
+                            <div *ngIf="f.submitted && bank_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && bank_name.invalid }">
+                                <div *ngIf="bank_name.errors.required" class="error">Bank Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch_name" class="form-control-label">Branch Name</label>
+                            <input type="text" [(ngModel)]="form.branch_name" name="branch_name" id="name" placeholder="Branch Name" class="form-control" #branch_name="ngModel" required>
+                            <div *ngIf="f.submitted && branch_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && branch_name.invalid }">
+                                <div *ngIf="branch_name.errors.required" class="error">Branch Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ifsc_code" class="form-control-label">IFSC Code</label>
+                            <input type="text" [(ngModel)]="form.ifsc_code" name="ifsc_code" id="name" placeholder="IFSC Code" class="form-control" #ifsc_code="ngModel" required>
+                            <div *ngIf="f.submitted && ifsc_code.invalid" [ngClass]="{ 'is-invalid': f.submitted && ifsc_code.invalid }">
+                              branch_name  <div *ngIf="ifsc_code.errors.required" class="error">IFSC Code is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="account_number" class="form-control-label">Account Number</label>
+                            <input type="text" [(ngModel)]="form.account_number" name="account_number" id="name" placeholder="Account Number" class="form-control" #account_number="ngModel" required>
+                            <div *ngIf="f.submitted && account_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && account_number.invalid }">
+                                <div *ngIf="account_number.errors.required" class="error">Account Number is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="check_draft_no" class="form-control-label">UTR/Cheque/Draft No.</label>
+                            <input type="text" [(ngModel)]="form.check_draft_no" name="check_draft_no" id="name" placeholder="UTR/Cheque/Draft No." class="form-control" #check_draft_no="ngModel" required>
+                            <div *ngIf="f.submitted && check_draft_no.invalid" [ngClass]="{ 'is-invalid': f.submitted && check_draft_no.invalid }">
+                                <div *ngIf="check_draft_no.errors.required" class="error">UTR/Cheque/Draft No is required</div>                                
+                            </div>
+                            <div *ngIf="errors.check_draft_no" class="error">{{errors.check_draft_no}}</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark" class="form-control-label">Remark</label>
+                            <textarea [(ngModel)]="form.remark" name="remark" id="name" placeholder="Remark" class="form-control" #remark="ngModel" required></textarea>
+                            <div *ngIf="f.submitted && remark.invalid" [ngClass]="{ 'is-invalid': f.submitted && remark.invalid }">
+                                <div *ngIf="remark.errors.required" class="error">Remark is required</div>
+                            </div>
+                        </div>                                           
+                        <div class="card-footer">
+                            <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img *ngIf="form.receipt_image.fileData" width="320" [src]="form.receipt_image.fileData">
+                <img *ngIf="!form.receipt_image.fileData" width="320" src="assets/img/no-image.jpg">
+            </div>
+        </div>        
+    </div>
+</div>

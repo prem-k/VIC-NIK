@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="_card _card-accent-success">
+      <div class="_card-header alpha-text">
+        <strong>My Profile</strong>
+      </div>
+      <div class="card-body card-block">
+        <div class="form-group row" *ngIf="profile.User">          
+          <div class="content">
+            <figure class="org-chart cf">
+              <ul class="administration">
+                <li>
+                  <ul class="director">
+                    <li class="director-first-li">
+                      <a><span>Victory</span></a>
+                      <ul class="subdirector child-sec">
+                        <li class="user-kyc subdirector-one"><a><span>KYC</span></a></li>
+                      </ul>
+                      <ul class="subdirector">
+                        <li class="user-kyc-status">
+                          <a>
+                            <span>
+                              Business<br>
+                              Self Business: {{bussiness.self_income}}<br>
+                              Team Business: {{bussiness.total_income}}<br>
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                      <div class="white-border"></div>
+                      <ul class="departments cf">
+                        <li class="pro-first-name"><a><span>{{profile.User.first_name}}</span></a></li>
+                        <li class="department dep-b">
+                          <a><span>{{profile.User.u_id}}</span></a>
+                        </li>
+                        <li class="department dep-a">
+                          <a><span>{{getPost(profile.User.designation)}}</span></a>
+                        </li>
+                        <!-- <li class="department dep-c">
+                            <a><span>{{profile.User.designation}}</span></a>
+                            <ul class="sections">
+                                <li class="section"><a><span>Section A1</span></a></li>
+                                <li class="section"><a><span>Section A2</span></a></li>
+                            </ul>
+                        </li> -->
+                        <li class="department" [ngClass]="profile.UserKyc.status==1?'green':'red'">
+                          <a>
+                            <span>Pan No. {{profile.UserKyc.pan_card_number}}<br>
+                                    Aadhar No. {{profile.UserKyc.aadhar_card_number}}<br>
+                                    {{profile.UserKyc.status==1?'Approved':'Pending'}}
+                              </span>
+                            </a>
+                        </li>
+                        <li class="department" [ngClass]="profile.UserBankAccount.status==1?'green':'red'">
+                          <a><span>Bank Account {{profile.UserBankAccount.account_number}}<br>
+                          {{profile.UserBankAccount.status==1?'Approved':'Pending'}}</span></a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="_card _card-accent-info">
+      <div class="_card-header alpha-text">
+        <strong>Training</strong>
+      </div>
+      <div class="card-body card-block">
+        <div class="form-group row">
+          <div class="col-md-12">
+            <iframe width="280" src="https://www.youtube.com/embed/it4LukyGTuE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="_card _card-accent-info">
+      <div class="_card-header alpha-text">
+        <strong>News</strong>
+      </div>
+      <div class="card-body card-block">
+        <div class="form-group row">
+          <div class="col-md-12">
+            <marquee direction="up" height="150">
+              <div class="{{(row.News.type == '1' && row.News.title) ? 'alert alert-info' : ''}}" *ngFor="let row of newsRowData">
+                <span *ngIf="row.News.type == '1' && row.News.title">
+                  <strong>{{row.News.title}}</strong><br>
+                    {{row.News.description}}
+                  </span>
+              </div>
+            </marquee>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="_card _card-accent-info">
+      <div class="_card-header alpha-text">
+        <strong>Events</strong>
+      </div>
+      <div class="card-body card-block">
+        <div class="form-group row">
+          <div class="col-md-12">
+            <marquee direction="up" height="150">
+              <div class="{{(row.News.type == '2' && row.News.title) ? 'alert alert-info' : ''}}" *ngFor="let row of newsRowData">
+                <span *ngIf="row.News.type == '2' && row.News.title">
+                <strong>{{row.News.title}}</strong><br>
+                    {{row.News.description}}
+                </span>
+              </div>
+            </marquee>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row">
+    <div class="col-md-12">
+         <app-bussiness></app-bussiness>
+    </div> 
+</div>  -->

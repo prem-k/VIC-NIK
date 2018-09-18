@@ -1,0 +1,95 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-note"></i>
+                    <strong>{{(id>0)?'Edit':'Add'}} Product</strong>
+                    <div class="float-right">
+                        <a title="Back" [routerLink]="['/dashboard/products']">
+                            <button class="btn btn-success btn-primary">Back</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate> 
+                        <div class="form-group">
+                            <label for="category_id" class="form-control-label">Select Category</label>
+                            <select [(ngModel)]="form.category_id" #cat_name="ngModel" name="category_id" id="category_id" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="{{cat.Category.id}}" *ngFor="let cat of categoryList">{{cat.Category.category}}</option>
+                            </select>
+                            <div *ngIf="f.submitted && cat_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && cat_name.invalid }">
+                                <div *ngIf="cat_name.errors.required" class="error">Category is required</div>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="name" class="form-control-label">Name</label>
+                            <input type="text" [(ngModel)]="form.name" name="name" id="name" placeholder="Name" class="form-control" #name="ngModel" required>
+                            <div *ngIf="f.submitted && name.invalid" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }">
+                                <div *ngIf="name.errors.required" class="error">Name is required</div>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input class="form-control" type="file" (change)="onFileChanged($event)" #fileInput accept="image/x-png,image/gif,image/jpeg">                            
+                        </div>                   
+                        <div class="form-group">
+                            <label for="price" class="form-control-label">Price</label>
+                            <input type="text" [(ngModel)]="form.price" name="price" id="price" placeholder="Name" class="form-control" #price="ngModel" required>
+                            <div *ngIf="f.submitted && price.invalid" [ngClass]="{ 'is-invalid': f.submitted && price.invalid }">
+                                <div *ngIf="price.errors.required" class="error">Price is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mrp" class="form-control-label">MRP</label>
+                            <input type="text" [(ngModel)]="form.mrp" name="mrp" id="mrp" placeholder="mrp" class="form-control" #mrp="ngModel" required>
+                            <div *ngIf="f.submitted && mrp.invalid" [ngClass]="{ 'is-invalid': f.submitted && mrp.invalid }">
+                                <div *ngIf="mrp.errors.required" class="error">Mrp is required</div>
+                            </div>
+                            <div *ngIf="f.submitted && errors && errors.unique_user" class="error">This mrp already exist.</div>
+                        </div>
+                        <div class="form-group" *ngIf="id === ''">
+                            <label for="vat" class="form-control-label">VAT</label>
+                            <input type="text" [(ngModel)]="form.vat" name="vat" id="vat" placeholder="vat" class="form-control" #vat="ngModel" required>
+                            <div *ngIf="f.submitted && vat.invalid" [ngClass]="{ 'is-invalid': f.submitted && vat.invalid }">
+                                <div *ngIf="vat.errors.required" class="error">Vat is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="min_qty" class="form-control-label">Qty</label>
+                            <input type="text" [(ngModel)]="form.min_qty" name="min_qty" id="min_qty" placeholder="Qty" class="form-control" #min_qty="ngModel" required>
+                            <div *ngIf="f.submitted && min_qty.invalid" [ngClass]="{ 'is-invalid': f.submitted && min_qty.invalid }">
+                                <div *ngIf="min_qty.errors.required" class="error">Qty is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="form-control-label">Description</label>
+                            <textarea [(ngModel)]="form.description" name="description" id="name" placeholder="description" class="form-control" #description="ngModel" required></textarea>
+                            <div *ngIf="f.submitted && description.invalid" [ngClass]="{ 'is-invalid': f.submitted && description.invalid }">
+                                <div *ngIf="description.errors.required" class="error">Description is required</div>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="status" class="form-control-label">Status</label>
+                            <select [(ngModel)]="form.status" name="status" id="status" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="2">Inactive</option>
+                            </select>
+                        </div>                        
+                        <div class="card-footer">
+                            <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+         <div class="col-md-4">
+            <div class="card">
+                <img *ngIf="temp_image.fileData" width="320" [src]="temp_image.fileData">
+                <img *ngIf="!temp_image.fileData" width="320" src="assets/img/no-image.jpg">
+            </div>
+        </div>
+    </div>
+</div>

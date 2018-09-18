@@ -1,0 +1,82 @@
+<div class="animated fadeIn">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+         <div class="card">
+            <div class="card-header">
+               <i class="fa fa-align-justify"></i> User Kyc 
+               <div class="add-new float-right" *ngIf="allowAddKyc()">
+                 <a [routerLink]="['add']" >
+                     <button class="btn btn-primary" type="button">Add New</button>
+                 </a>    
+               </div>                  
+            </div>
+            <div class="card-body">
+               <div class="row mb-3" *ngIf="isAdmin()">
+                  <div class="col-md-{{(searchBy == 'date'?'9':'7')}} offset-md-12">
+                    <form (ngSubmit)="dataList()" method="post" novalidate="novalidate">
+                        <div class="input-group">  
+                          <div class="margin-right-15">
+                            <select (ngModelChange)="resetSearchInputs()" [(ngModel)]="searchBy" #searchBY="ngModel" name="search_by" id="search_by" class="form-control">
+                                <option value="u_id">Search By User ID</option>
+                                <option value="aadhar_card_number">Search By Aadhar Card Number</option>
+                                <option value="pan_card_number">Search By Pan Card Number</option>                                
+                                <option value="status">Search By Status</option>
+                                <option value="date">Search By Joining Date</option>
+                            </select>
+                          </div> 
+                          <input *ngIf="searchBy == 'u_id'" name="search_text" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="User ID" [(ngModel)]="searchText.u_id">                         
+
+                           <input *ngIf="searchBy == 'aadhar_card_number'" name="aadhar_card_number" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Aadhar Card Number" [(ngModel)]="searchText.aadhar_card_number">
+
+                           <input *ngIf="searchBy == 'pan_card_number'" name="pan_card_number" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Pan Card Number" [(ngModel)]="searchText.pan_card_number">
+
+                          <select *ngIf="searchBy == 'status'" [(ngModel)]="searchText.status" name="status" id="status" class="form-control margin-right-10">
+                              <option value="{{i}}" *ngFor="let data of ['Select Status','Approved','Pending']; let i = index">{{data}}</option>
+                          </select>
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.start_time">
+                          
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.end_time"> 
+                          <input type="button" class="btn btn-primary margin-right-10" name="searchData" value="Search" (click)="dataList()">
+                        </div>
+                    </form>
+                  </div>
+               </div>
+               <table class="table table-responsive-sm table-hover table-outline mb-0">
+                  <thead>
+                     <tr>
+                        <th *ngIf="isAdmin()">User ID </th>
+                        <th>Aadhar No</th>
+                        <th>Pan Card No</th>
+                        <th>Aadhar Card image</th>
+                        <th>Pan Card image</th>
+                        <th>Status</th>
+                        <th *ngIf="!isAdmin()">Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>                     
+                     <tr *ngFor="let row of rowData | paginate: { itemsPerPage: limit, currentPage: p1, id: 'my_pagination', totalItems: total_records }">   
+                        <td *ngIf="isAdmin()">{{row.User.u_id}}</td>
+                        <td>{{row.UserKyc.aadhar_card_number}}</td>
+                        <td>{{row.UserKyc.pan_card_number}}</td>
+                        <td><img width="120" src="{{row.UserKyc.aadhar_card_attachment}}"></td>
+                        <td><img width="120" src="{{row.UserKyc.pan_card_attachment}}"></td>
+                        <td> 
+                            <span *ngIf="!isAdmin()" class="badge badge-{{(row.UserKyc.status == '1')?'success':'danger'}}">{{(row.UserKyc.status == '1')?'Approved':'Pending'}}</span>
+                            <select *ngIf="isAdmin()" [(ngModel)]="row.UserKyc.status" name="defaultPost_{{row.UserKyc.id}}" id="defaultPost_{{row.UserKyc.id}}" class="form-control" (change)="changeStatus(row.UserKyc.id,row.UserKyc.status)">
+                                <option value="2">Pending</option>
+                                <option value="1">Approved</option>
+                            </select>
+                        </td>
+                        <td *ngIf="!isAdmin()"><a class="{{(row.UserKyc.status == '1')?'pointer-events-none':''}}" href title="Edit" [routerLink]="['add/' + row.UserKyc.id]" > <i class="icon-note"></i></a></td>                        
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="float-right">
+                  <pagination-controls class="pagination" (pageChange)="onPageChange(p1 = $event)" id="my_pagination"></pagination-controls> 
+               </div>                 
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

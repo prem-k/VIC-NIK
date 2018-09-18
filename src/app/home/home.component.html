@@ -1,0 +1,534 @@
+<div class="home-page" data-spy="scroll" data-target="#navbar-example">
+<div id="preloader"></div>
+<style type="text/css">
+   .bg-light {
+    background-color: transparent !important;
+</style>
+<header>
+    <!-- header-area start -->
+    <div id="sticker" class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <!-- Navigation -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+
+                        <a class="navbar-brand page-scroll sticky-logo" href="#/home"><img src="assets/img/brand/logo.png" alt="" class="img-responsive"></a>
+                        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto d-none d-sm-block">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <span class="sr-only"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav home-nav">
+                                <li class="nav-item active">
+                                    <a class="page-scroll nav-link" href="#home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#services">Services</a>
+                                </li>                                
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#portfolio">Portfolio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#blog">News</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#contact">Contact</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#/dashboard/login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll nav-link" href="#/dashboard/register">Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- navbar-collapse -->
+                    </nav>
+                    <!-- END: Navigation -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header-area end -->
+</header>
+<!-- header end -->
+
+<!-- Start Slider Area -->
+<div id="home" class="slider-area" style="display: none;" *ngIf="sliderList">
+    <div class="bend niceties preview-2">
+        <div id="ensign-nivoslider" class="slides">            
+            <img *ngFor="let data of sliderList" [src]="data.Banner.image" alt="1" title="#slider-direction-{{data.Banner.id}}" /> 
+            <h1 class="running-text"><span class="typed">Victory Led.</span></h1>         
+        </div>
+        <!-- direction 1 -->
+    </div>
+</div>
+<!-- End Slider Area -->
+<div class="clear"></div>
+<!-- Start About area -->
+<div id="about" class="about-area area-padding {{(sliderList.length > 0)?'':'margin-top-50'}}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h2>About Business</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- single-well start-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-left">
+                    <div class="single-well">
+                        <a href="#">
+                            <img src="assets/img/about/about.PNG" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- single-well end-->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="well-middle">
+                    <div class="single-well">
+                        <a href="#">
+                            <h4 class="sec-head">Types of led we sell</h4>
+                        </a>
+                        <!-- <p>
+                            Redug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure aspernatur sit adipisci quaerat unde at nequeRedug Lagre dolor sit amet, consectetur adipisicing elit. Itaque quas officiis iure
+                        </p> -->
+                        <ul>
+                            <li>
+                                <i class="fa fa-check"></i> OUTDOOR LED
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i> INDOOR LED
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i> MOBILE VAN LED
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i> WALL LED
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i> DANCE FLOOR LED
+                            </li>
+                            <li>
+                                <i class="fa fa-check"></i> DJ LED
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End col-->
+        </div>
+    </div>
+</div>
+<!-- End About area -->
+
+<!-- Start Service area -->
+<div id="services" class="services-area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline services-head text-center">
+                    <h2>Our Services</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center services-contents">
+
+            <!-- Start Left services -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="about-move">
+                    <div class="services-details">
+                        <div class="single-services">
+                            <a class="services-icon" href="#">
+                                <i class="fa fa-code"></i>
+                            </a>
+                            <h4>Installation</h4>
+                            <p>
+                                will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end about-details -->
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="about-move">
+                    <div class="services-details">
+                        <div class="single-services">
+                            <a class="services-icon" href="#">
+                                <i class="fa fa-camera-retro"></i>
+                            </a>
+                            <h4>Delivery</h4>
+                            <p>
+                                will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end about-details -->
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <!-- end col-md-4 -->
+                <div class=" about-move">
+                    <div class="services-details">
+                        <div class="single-services">
+                            <a class="services-icon" href="#">
+                                <i class="fa fa-wordpress"></i>
+                            </a>
+                            <h4>Structure Build</h4>
+                            <p>
+                                will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end about-details -->
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <!-- end col-md-4 -->
+                <div class=" about-move">
+                    <div class="services-details">
+                        <div class="single-services">
+                            <a class="services-icon" href="#">
+                                <i class="fa fa-camera-retro"></i>
+                            </a>
+                            <h4>Onsite Service </h4>
+                            <p>
+                                will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end about-details -->
+                </div>
+            </div>
+            <!-- End Left services -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <!-- end col-md-4 -->
+                <div class=" about-move">
+                   <!--  <div class="services-details">
+                        <div class="single-services">
+                            <a class="services-icon" href="#">
+                                <i class="fa fa-bar-chart"></i>
+                            </a>
+                            <h4>Seo Expart</h4>
+                            <p>
+                                will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
+                            </p>
+                        </div>
+                    </div> -->
+                    <!-- end about-details -->
+                </div>
+            </div>
+            <!-- End Left services -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <!-- end col-md-4 -->
+                <div class=" about-move">
+                    <!-- <div class="services-details">
+                        <div class="single-services">
+                            <a class="services-icon" href="#">
+                                <i class="fa fa-ticket"></i>
+                            </a>
+                            <h4>24/7 Support</h4>
+                            <p>
+                                will have to make sure the prototype looks finished by inserting text or photo.make sure the prototype looks finished by.
+                            </p>
+                        </div>
+                    </div> -->
+                    <!-- end about-details -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End Service area -->
+
+<!-- Start reviews Area -->
+<div class="reviews-area hidden-xs">
+    <div class="work-us">
+        <div class="work-left-text">
+            <a href="#">
+                <img src="assets/img/about/contact.JPG" alt="">
+            </a>
+        </div>
+        <div class="work-right-text text-center">
+            <h2>Reach us</h2>
+            <h5>Please send your query using the contact form below. Know about oppotunities, share ideas, give feedback, raise query etc.</h5>
+            <a href="#contact" class="ready-btn">Reach us</a>
+        </div>
+    </div>
+</div>
+<!-- End reviews Area -->
+
+<!-- Start portfolio Area -->
+<div id="portfolio" class="portfolio-area area-padding fix" *ngIf="productsList">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h2>Our Products</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Start Portfolio -page -->
+            <!-- <div class="awesome-project-1 fix d-flex w-100">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="awesome-menu ">
+                        <ul class="project-menu">
+                            <li>
+                                <a href="#" class="active" data-filter="*">All</a>
+                            </li>
+                            <li>
+                                <a href="#" data-filter=".development">Development</a>
+                            </li>
+                            <li>
+                                <a href="#" data-filter=".design">Design</a>
+                            </li>
+                            <li>
+                                <a href="#" data-filter=".photo">Photoshop</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+            <div class="awesome-project-content d-flex w-100" *ngIf="productsList">
+                <!-- single-awesome-project start -->
+                <div *ngFor="let row of productsList" class="col-md-4 col-sm-4 col-xs-12 design development">
+                    <div class="single-awesome-project">
+                        <div class="awesome-img">
+                            <a href ><img [src]="row.Product.image" alt="" /></a>
+                            <div class="add-actions text-center">
+                                <div class="project-dec">
+                                    <a class="venobox" data-gall="myGallery" href="img/portfolio/1.jpg">
+                                        <h4>{{row.Product.name}}</h4>
+                                        <!-- <span>{{row.Product.description}}</span> -->
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- awesome-portfolio end -->
+
+<!-- Start Blog Area -->
+<div id="blog" class="blog-area" *ngIf="newsList.length > 0">
+    <div class="blog-inner area-padding">
+        <div class="blog-overly"></div>
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-headline text-center">
+                        <h2>Latest News</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Start Left Blog -->
+                <div *ngFor="let row of newsList" class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-blog">                        
+                        <div class="blog-text">
+                            <h4>{{row.News.title}}</h4>
+                            <p>{{row.News.description}}</p>
+                        </div>                        
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Blog -->
+    
+<!-- Start contact Area -->
+<div id="contact" class="contact-area">
+    <div class="contact-inner area-padding">
+        <div class="contact-overly"></div>
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-headline text-center">
+                        <h2>Contact us</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Start contact icon column -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-icon text-center">
+                        <div class="single-icon">
+                            <i class="fa fa-mobile"></i>
+                            <p>
+                                Call: +91 827 980 0048
+                                <br>
+                                <span>Monday-Friday (9am-5pm)</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start contact icon column -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-icon text-center">
+                        <div class="single-icon">
+                            <i class="fa fa-envelope-o"></i>
+                            <p>
+                                Email: victoryblazeled@gmail.com
+                                <br>
+                                <span>Web: www.victoryled.in</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start contact icon column -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-icon text-center">
+                        <div class="single-icon">
+                            <i class="fa fa-map-marker"></i>
+                            <p>
+                                Location: V B Solar BADONI VILLA,
+                                <br>
+                                <span> NEAR MIT/SBI, Rishikesh, Dhalwala, Dehradun, Uttarakhand 249201</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start Google Map -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <!-- Start Map -->
+                    <!-- Uncomment below if you wan to use dynamic maps -->
+                    <!--<div id="google-map" data-latitude="40.713732" data-longitude="-74.0092704"></div>-->
+                    <div class="embed-responsive embed-responsive-16by9">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19522.765903542848!2d78.28286046397947!3d30.1179474853097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39093d8a3b4f1b2b%3A0xf97b77bcf855e8c6!2sV+B+Solar!5e0!3m2!1sen!2sin!4v1536586935954" width="100%" height="" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                    <!-- End Map -->
+                </div>
+                <!-- End Google Map -->
+
+                <!-- Start  contact -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form contact-form">
+                        <div class="successMsg" *ngIf="enquirySend">Your message has been sent. Thank you!</div>
+                        <div id="errormessage"></div>
+                        <form name="form" method="post" (ngSubmit)="addNewInquiry()" class="contactForm" novalidate>
+                            <div class="form-group">
+                                <input type="text" [(ngModel)]="enquiryForm.name" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" [(ngModel)]="enquiryForm.email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="mobile" [(ngModel)]="enquiryForm.mobile" id="mobile" placeholder="Mobile" data-rule="minlen:10" data-msg="Please enter at least 10 digits" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="subject" [(ngModel)]="enquiryForm.subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                <div class="validation"></div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" [(ngModel)]="enquiryForm.message" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                <div class="validation"></div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Left contact -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Contact Area -->
+
+<!-- Start Footer bottom Area -->
+<footer>
+    <div class="footer-area">
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="footer-content">
+                        <div class="footer-head">
+                            <div class="footer-logo">
+                                <h2><span>e</span>Business</h2>
+                            </div>
+
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                            <div class="footer-icons">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-google"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- end single footer -->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="footer-content">
+                        <div class="footer-head">
+                            <h4>information</h4>
+                            <p>
+                                V B Solar BADONI VILLA, NEAR MIT/SBI, Rishikesh, Dhalwala, Dehradun, Uttarakhand 249201
+                            </p>
+                            <div class="footer-contacts">
+                                <p><span>Tel:</span> +91 827 980 0048</p>
+                                <p><span>Email:</span> victoryblazeled@gmail.com</p>
+                                <p><span>Working Hours:</span> 9am-5pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end single footer -->                
+            </div>
+        </div>
+    </div>
+    <div class="footer-area-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="copyright text-center">
+                        <p>
+                            &copy; Copyright <strong>Victory</strong>. All Rights Reserved
+                        </p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a> -->
+</div>

@@ -1,0 +1,86 @@
+<div class="animated fadeIn">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+         <div class="card">
+            <div class="card-header">
+               <i class="fa fa-align-justify"></i> Users
+                  <div class="add-new float-right">
+                    <a [routerLink]="['add']" >
+                        <button class="btn btn-primary" type="button">Add New</button>
+                    </a>    
+                  </div>
+            </div>
+            <div class="card-body">
+               <div class="row mb-3">
+                  <div class="col-md-{{(searchBy == 'date'?'8':'6')}} offset-md-12">
+                    <form (ngSubmit)="dataList()" method="post" novalidate="novalidate">                        
+                        <div class="input-group">  
+                          <div class="margin-right-15">
+                            <select (ngModelChange)="resetSearchInputs()" [(ngModel)]="searchBy" #searchBY="ngModel" name="search_by" id="search_by" class="form-control">
+                                <option value="u_id">Search By User ID</option>
+                                <option value="mobile_number">Search By Phone</option>
+                                <option value="designation">Search By Rank</option>
+                                <option value="status">Search By Status</option>
+                                <option value="date">Search By Joining Date</option>
+                            </select>
+                          </div>
+                          <input *ngIf="searchBy == 'u_id'" name="search_text" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="User ID" [(ngModel)]="searchText.u_id">
+
+                           <input *ngIf="searchBy == 'mobile_number'" name="search_text" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Phone" [(ngModel)]="searchText.mobile_number">
+
+                          <select *ngIf="searchBy == 'designation'" [(ngModel)]="searchText.designation" name="designation" id="designation" class="form-control margin-right-10">
+                              <option value="{{data.id}}" *ngFor="let data of userPostObj">{{data.name}}</option>
+                          </select>
+                          <select *ngIf="searchBy == 'status'" [(ngModel)]="searchText.status" name="status" id="status" class="form-control margin-right-10">
+                              <option value="{{i}}" *ngFor="let data of ['Select Status','Active','Inactive']; let i = index">{{data}}</option>
+                          </select>
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.start_time">
+
+                          <input *ngIf="searchBy == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="searchText.end_time"> 
+                          <input type="button" class="btn btn-primary margin-right-10" name="searchData" value="Search" (click)="dataList()">
+                        </div>
+                    </form>
+                  </div>
+               </div>
+               <table class="table table-responsive-sm table-hover table-outline mb-0">
+                  <thead>
+                     <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th class="text-right">Zip Code</th>
+                        <th>Sponsor ID</th>
+                        <th class="text-right" width="120px;">Status</th>
+                        <th class="text-right">Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>                     
+                     <tr *ngFor="let row of rowData | paginate: { itemsPerPage: limit, currentPage: p1, id: 'my_pagination', totalItems: total_records }">   
+                        <td>{{row.User.u_id}}</td>
+                        <td>{{row.User.first_name}}</td>
+                        <td>{{row.User.email}}</td>
+                        <td>{{row.User.mobile_number}}</td>
+                        <td class="text-right">{{row.User.zip_code}}</td>
+                        <td>{{row.UserRelation["0"].User.u_id}}</td>
+                        <td width="120px">
+                           <select [(ngModel)]="row.User.status" name="defaultPost_{{row.User.id}}" id="defaultPost_{{row.User.id}}" class="form-control" (change)="changeUserStatus(row.User.id,row.User.status)">
+                                <option value="1">Active</option>
+                                <option value="2">Inactive</option>
+                            </select>
+                        </td>
+                        <td class="text-right"> 
+                           <a href title="Edit" [routerLink]="['add/' + row.User.id]" > <i class="icon-note"></i></a>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="float-right">
+                  <pagination-controls class="pagination" (pageChange)="onPageChange(p1 = $event)" id="my_pagination"></pagination-controls> 
+               </div>                 
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-note"></i>
+                    <strong>{{(id>0)?'Edit':'Add'}} Account</strong>
+                    <div class="float-right">
+                        <a title="Back" [routerLink]="['/dashboard/accounts']">
+                            <button class="btn btn-success btn-primary">Back</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate>
+                        <div class="form-group">
+                            <label for="bank_name" class="form-control-label">Bank Name</label>
+                            <input type="text" [(ngModel)]="form.bank_name" name="bank_name" id="name" placeholder="Bank Name" class="form-control" #bank_name="ngModel" required>
+                            <div *ngIf="f.submitted && bank_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && bank_name.invalid }">
+                                <div *ngIf="bank_name.errors.required" class="error">User ID is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="branch_name" class="form-control-label">Branch Name</label>
+                            <input type="text" [(ngModel)]="form.branch_name" name="branch_name" id="branch_name" placeholder="Branch Name" class="form-control" #branch_name="ngModel" required>
+                            <div *ngIf="f.submitted && branch_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && branch_name.invalid }">
+                                <div *ngIf="branch_name.errors.required" class="error">Branch Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="account_number" class="form-control-label">Account Number</label>
+                            <input type="number" [(ngModel)]="form.account_number" name="account_number" id="name" placeholder="Account Number" class="form-control" #account_number="ngModel" required>
+                            <div *ngIf="f.submitted && account_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && account_number.invalid }">
+                                <div *ngIf="account_number.errors.required" class="error">Account Number is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ifsc_code" class="form-control-label">IFSC Code</label>
+                            <input type="text" [(ngModel)]="form.ifsc_code" name="ifsc_code" id="ifsc_code" placeholder="IFSC Code" class="form-control" #ifsc_code="ngModel" required>
+                            <div *ngIf="f.submitted && ifsc_code.invalid" [ngClass]="{ 'is-invalid': f.submitted && ifsc_code.invalid }">
+                                <div *ngIf="ifsc_code.errors.required" class="error">IFSC Code is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Bank Copy</label>
+                            <input class="form-control" type="file" (change)="attachedBankcopy($event)" #panCardInput accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="nomini_name" class="form-control-label">Nominee Name</label>
+                            <input type="text" [(ngModel)]="form.nomini_name" name="nomini_name" id="name" placeholder="Nomini Name" class="form-control" #nomini_name="ngModel" required>
+                            <div *ngIf="f.submitted && nomini_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && nomini_name.invalid }">
+                                <div *ngIf="nomini_name.errors.required" class="error">Nomini Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="relation" class="form-control-label">Relation</label>
+                            <input type="text" [(ngModel)]="form.relation" name="relation" id="name" placeholder="Relation" class="form-control" #relation="ngModel" required>
+                            <div *ngIf="f.submitted && relation.invalid" [ngClass]="{ 'is-invalid': f.submitted && relation.invalid }">
+                                <div *ngIf="relation.errors.required" class="error">Relation is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nominee_age" class="form-control-label">Nominee Age</label>
+                            <input type="text" [(ngModel)]="form.nominee_age" name="nominee_age" id="name" placeholder="Nominee Age" class="form-control" #nominee_age="ngModel" required>
+                            <div *ngIf="f.submitted && nominee_age.invalid" [ngClass]="{ 'is-invalid': f.submitted && nominee_age.invalid }">
+                                <div *ngIf="nominee_age.errors.required" class="error">Nominee Age is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark" class="form-control-label">Remark</label>
+                            <textarea id="remark"  [(ngModel)]="form.remark" name="remark" placeholder="Remark" class="form-control" #remark="ngModel" required></textarea>
+                            <div *ngIf="f.submitted && remark.invalid" [ngClass]="{ 'is-invalid': f.submitted && remark.invalid }">
+                                <div *ngIf="remark.errors.required" class="error">Remark is required</div>
+                            </div>
+                        </div>  -->                                              
+                        <div class="card-footer">
+                            <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img *ngIf="form.bank_copy_attachment.fileData" height="200" [src]="form.bank_copy_attachment.fileData">
+                <img *ngIf="!form.bank_copy_attachment.fileData" height="200" src="assets/img/no-image.jpg">
+            </div>
+        </div>
+    </div>
+</div>

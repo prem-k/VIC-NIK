@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <i class="icon-note"></i>
+                    <strong>{{(id>0)?'Edit':'Add'}} Kyc</strong>
+                    <div class="float-right">
+                        <a title="Back" [routerLink]="['/dashboard/kyc']">
+                            <button class="btn btn-success btn-primary">Back</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate>
+                        <div class="form-group">
+                            <label for="pan_card_number" class="form-control-label">Pan Card</label>
+                            <input type="text" [(ngModel)]="form.pan_card_number" name="pan_card_number" id="name" placeholder="Pan Card" class="form-control" #pan_card_number="ngModel" required>
+                            <div *ngIf="f.submitted && pan_card_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && pan_card_number.invalid }">
+                                <div *ngIf="pan_card_number.errors.required" class="error">Pan Card is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="aadhar_card_number" class="form-control-label">Aadhar  Card</label>
+                            <input type="text" [(ngModel)]="form.aadhar_card_number" name="aadhar_card_number" id="name" placeholder="Aadhar  Card" class="form-control" #aadhar_card_number="ngModel" required>
+                            <div *ngIf="f.submitted && aadhar_card_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && aadhar_card_number.invalid }">
+                                <div *ngIf="aadhar_card_number.errors.required" class="error">Pan Card is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Aadhar Card Attachment</label>
+                            <input class="form-control" type="file" (change)="onFileChanged($event)" #fileInput accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                        <div class="form-group">
+                            <label>Pan Card Attachment</label>
+                            <input class="form-control" type="file" (change)="attachedPancard($event)" #panCardInput accept="image/x-png,image/gif,image/jpeg">
+                        </div>                    
+                        <div class="card-footer">
+                            <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img *ngIf="form.aadhar_card_attachment.fileData" height="200" [src]="form.aadhar_card_attachment.fileData">
+                <img *ngIf="!form.aadhar_card_attachment.fileData" height="200" src="assets/img/no-image.jpg">
+            </div>
+            <div class="card">
+                <img *ngIf="form.pan_card_attachment.fileData" height="200" [src]="form.pan_card_attachment.fileData">
+                <img *ngIf="!form.pan_card_attachment.fileData" height="200" src="assets/img/no-image.jpg">
+            </div>
+        </div>
+    </div>
+</div>

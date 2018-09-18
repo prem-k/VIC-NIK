@@ -1,0 +1,188 @@
+<div class="back-image app-body">
+<main class="main d-flex align-items-center register-form">
+<div class="container">    
+    <div class="row">
+        <div class="col-md-8  mx-auto">
+            <div *ngIf="userIsRegister" class="col-sm-12 col-sm-12">
+                <p>
+                    <a title="Back to login" href="#/dashboard/login">Back to Login</a>.
+                </p>
+                <div class="successMsg">Registered Successfully !</div>
+            </div>            
+            <div class="card mx-4">
+                <div *ngIf="!userIsRegister" class="card-body p-4">
+                    <h1>Register</h1>
+                    <p class="text-muted">Create your account</p>
+                    <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.u_id" name="u_id" id="u_id" placeholder="User ID" class="form-control" #u_id="ngModel" required>
+                            <div *ngIf="f.submitted && u_id.invalid" [ngClass]="{ 'is-invalid': f.submitted && u_id.invalid }">
+                                <div *ngIf="u_id.errors.required" class="error">User ID is required</div>
+                            </div>
+                            <div *ngIf="errors && errors.u_id" class="error">This User ID already exist.</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@</span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.email" name="email" id="email" placeholder="Email" class="form-control" #email="ngModel" required>
+                            <div *ngIf="f.submitted && email.invalid" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }">
+                                <div *ngIf="email.errors.required" class="error">Email is required</div>
+                            </div>
+                            <div *ngIf="f.submitted && errors && errors.unique_user" class="error">This email already exist.</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.parent_u_id" name="parent_u_id" id="parent_u_id" placeholder="Sponsor ID" class="form-control" #parent_u_id="ngModel" required (ngModelChange)="validateSponserId(form.parent_u_id)">
+                            <div *ngIf="f.submitted && parent_u_id.invalid" [ngClass]="{ 'is-invalid': f.submitted && parent_u_id.invalid }">
+                                <div *ngIf="parent_u_id.errors.required" class="error">Sponsor ID is required</div>
+                            </div>
+                            <div *ngIf="errors.parent_u_id" class="error">{{errors.parent_u_id}}</div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input disabled type="text" [(ngModel)]="form.sponsor_name" name="phone" id="sponsor_name" placeholder="Sponsor Name" class="form-control" #sponsor_name="ngModel" required>
+                            <div *ngIf="f.submitted && sponsor_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && sponsor_name.invalid }">
+                                <div *ngIf="sponsor_name.errors.required" class="error">Sponsor name is required</div>
+                                <div *ngIf="errors.parent_u_id" class="error">{{errors.parent_u_id}}</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.pan_card" name="pan_card" id="pan_card" placeholder="Pan Number" class="form-control" #pan_card="ngModel" required>
+                            <div *ngIf="f.submitted && pan_card.invalid" [ngClass]="{ 'is-invalid': f.submitted && pan_card.invalid }">
+                                <div *ngIf="pan_card.errors.required" class="error">Pan Card is required</div>
+                                <div *ngIf="errors.pan_card" class="error">{{errors.pan_card}}</div>
+                                <div *ngIf="errors.pan_card_number" class="error">{{errors.pan_card_number}}</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.first_name" name="first_name" id="first_name" placeholder="Name" class="form-control" #first_name="ngModel" required>
+                            <div *ngIf="f.submitted && first_name.invalid" [ngClass]="{ 'is-invalid': f.submitted && first_name.invalid }">
+                                <div *ngIf="first_name.errors.required" class="error">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend" style="margin-right: 4%;">
+                                <span class="input-group-text">Gender</span>
+                            </div>
+                            <div class="form-check-inline form-check">
+                                <label for="inline-radio1" class="form-check-label ">
+                                    <input [(ngModel)]="form.gender" name="gender" type="radio" id="inline-radio1" name="inline-radios" value="1" class="form-check-input">Male &nbsp;&nbsp;
+                                </label>
+                                <label for="inline-radio2" class="form-check-label ">
+                                    <input [(ngModel)]="form.gender" name="gender" type="radio" id="inline-radio2" name="inline-radios" value="2" class="form-check-input">Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.father_name" name="father_name" id="father_name" placeholder="Father's name" class="form-control" #father_name="ngModel">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="date" [(ngModel)]="form.date_of_birth" name="date_of_birth" id="date_of_birth" placeholder="Zip Code" class="form-control" #date_of_birth="ngModel" required>
+                            <div *ngIf="f.submitted && date_of_birth.invalid" [ngClass]="{ 'is-invalid': f.submitted && date_of_birth.invalid }">
+                                <div *ngIf="date_of_birth.errors.required" class="error">D.O.B is required</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="number" [(ngModel)]="form.mobile_number" name="mobile_number" id="mobile_number" placeholder="Mobile" class="form-control" #mobile_number="ngModel" required>
+                            <div *ngIf="f.submitted && mobile_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && mobile_number.invalid }">
+                                <div *ngIf="mobile_number.errors.required" class="error">Mobile is required</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <textarea id="address" [(ngModel)]="form.address" name="address" placeholder="Address" class="form-control" #address="ngModel" required></textarea>
+                            <div *ngIf="f.submitted && address.invalid" [ngClass]="{ 'is-invalid': f.submitted && address.invalid }">
+                                <div *ngIf="address.errors.required" class="error">Address is required</div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <select [(ngModel)]="form.state_id" name="state_id" id="state_id" class="form-control" (change)="getCities(form.state_id)">
+                                <option value="0">Select State</option>
+                                <option value="{{state.State.id}}" *ngFor="let state of formList.stateList">{{state.State.name}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <select [(ngModel)]="form.city_id" name="city_id" id="city_id" class="form-control">
+                                <option value="0">Select City</option>
+                                <option value="{{city.City.id}}" *ngFor="let city of formList.cityList">{{city.City.name}}</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-user"></i></span>
+                            </div>
+                            <input type="text" [(ngModel)]="form.zip_code" name="zip_code" id="zip_code" placeholder="Pin Code" class="form-control" #zip_code="ngModel" required>
+                            <div *ngIf="f.submitted && zip_code.invalid" [ngClass]="{ 'is-invalid': f.submitted && zip_code.invalid }">
+                                <div *ngIf="zip_code.errors.required" class="error">Pin Code is required</div>
+                            </div>
+                        </div>
+                         <div class="row">
+                            <div class="col-md-6 btn">
+                                <button type="submit" class="btn btn-block btn-success">Create Account</button>
+                            </div>
+                            <div class="col-md-6 btn">
+                                <a title="Back to login" [routerLink]="['/dashboard/login']" >
+                                    <button type="submit" class="btn btn-block btn-primary">Back to Login</button>
+                                </a>        
+                            </div>
+                        </div>
+                    </form>
+                </div>                
+                <div *ngIf="userIsRegister" class="card-body p-4">                
+                    <h4 style="border-bottom:1px solid #d4c8c8;padding-bottom:23px;margin-bottom:23px;">Welcome Letter </h4>                    
+                    <div class="input-group mb-3">
+                        <div class="welcome-msg">
+                           Dear <b>{{registerUser.first_name}}</b><br><br>
+                            Victory Blaze Renewable Energy Pvt. Ltd. is pleased to welcome you as a new client. <br> I appreciate you for choosing a product with us. <br><br>
+                            I assure you that we are one of the best in the business and will provide you reliable, <br> efficient and dedicated support and service. <br><br>
+                            Your suggestions and recommendations are of extreme importance to us and we look forward <br> for your valuable inputs. <br><br>
+
+                            User ID : <b>{{registerUser.u_id}}</b><br>
+                            Password : <b>{{registerUser.text_password}}</b><br><br>
+
+                            Thanks a lot... <br><br>
+                            Regards
+                            <br>
+                            <!-- Vinay Badoni <br>
+                            Managing Director <br> -->
+                            Victory Blaze Renewable Energy Pvt. Ltd.
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+</main> 
+</div>

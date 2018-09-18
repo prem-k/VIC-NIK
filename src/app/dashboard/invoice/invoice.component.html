@@ -1,0 +1,82 @@
+<div class="animated fadeIn">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="successMsg" *ngIf="successMsg">{{successMsg}}</div>
+         <div class="card">
+            <div class="card-header">
+               <i class="fa fa-align-justify"></i> Users
+                  <div class="add-new float-right">
+                    <a [routerLink]="['add']" >
+                        <button _ngcontent-c0="" class="btn btn-primary" type="button">Add New</button>
+                    </a>    
+                  </div>
+            </div>
+            <div class="card-body">
+               <div class="row mb-3">
+                  <div class="col-md-6 offset-md-12">
+                    <form (ngSubmit)="dataList()" method="post" novalidate="novalidate">                        
+                        <div class="input-group">  
+                          <div class="margin-right-15">
+                            <select (ngModelChange)="resetSearchInputs()" [(ngModel)]="search.by" #searchBY="ngModel" name="search_by" id="search_by" class="form-control">
+                                <option value="text">Search By Text</option>
+                                <option value="date">Search By Date</option>
+                                <option value="positions">Search By Positions</option>
+                            </select>
+                          </div>              
+                          <!-- <div class="input-group-prepend" *ngIf="search.by == 'text'">
+                              <span class="input-group-text">
+                              <i class="fa fa-search"></i>
+                              </span>
+                          </div> -->
+                          <input *ngIf="search.by == 'text'" bsdaterangepicker name="search_text" type="text" class="form-control margin-right-10" aria-required="true" aria-invalid="false" placeholder="Name, Email, phone" [(ngModel)]="search.text">
+
+                          <input *ngIf="search.by == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="search.date_from">
+                          <input *ngIf="search.by == 'date'" class="form-control margin-right-10" type="Date" name="dateFrom" [(ngModel)]="search.date_to"> 
+
+                          <select *ngIf="search.by == 'positions'" [(ngModel)]="search.position" name="position" id="position" class="form-control margin-right-10">
+                              <option value="{{data.id}}" *ngFor="let data of userPostObj" value="1">{{data.name}}</option>
+                          </select>
+                          <input type="button" class="btn btn-primary margin-right-10" name="searchData" value="Search" (click)="dataList()">
+                        </div>
+                    </form>
+                  </div>
+               </div>
+               <table class="table table-responsive-sm table-hover table-outline mb-0">
+                  <thead>
+                     <tr>
+                        <th>Sponsor ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th class="text-right">Zip Code</th>
+                        <th class="text-right" width="120px;">Status</th>
+                        <th class="text-right">Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>                     
+                     <tr *ngFor="let row of rowData | paginate: { itemsPerPage: limit, currentPage: p1, id: 'my_pagination', totalItems: total_records }">   
+                        <td>{{row.User.u_id}}</td>
+                        <td>{{row.User.first_name}}</td>
+                        <td>{{row.User.email}}</td>
+                        <td>{{row.User.mobile_number}}</td>
+                        <td class="text-right">{{row.User.zip_code}}</td>
+                        <td width="120px">
+                           <select [(ngModel)]="row.User.status" name="defaultPost_{{row.User.id}}" id="defaultPost_{{row.User.id}}" class="form-control" (change)="changeUserStatus(row.User.id,row.User.status)">
+                                <option value="1">Active</option>
+                                <option value="2">Inactive</option>
+                            </select>
+                        </td>
+                        <td class="text-right"> 
+                           <a href title="Edit" [routerLink]="['add/' + row.User.id]" > <i class="icon-note"></i></a>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div class="float-right">
+                  <pagination-controls class="pagination" (pageChange)="onPageChange(p1 = $event)" id="my_pagination"></pagination-controls> 
+               </div>                 
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
