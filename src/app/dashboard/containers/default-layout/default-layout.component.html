@@ -31,7 +31,7 @@
       </li>
     </ol>
     <div class="container-fluid">
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="changeOfRoutes($event)"></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
 </div>

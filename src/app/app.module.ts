@@ -19,14 +19,15 @@ import { AppRoutesModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './dashboard/login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { NotfoundComponent } from './notfound/notfound.component';
 /*import { NgDatepickerModule } from 'ng2-datepicker';*/
 
 const APP_CONTAINERS = [
   AppComponent,
   HomeComponent,
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
+  NotfoundComponent
 ];
 
 

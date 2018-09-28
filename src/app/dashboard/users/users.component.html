@@ -71,7 +71,7 @@
                             </select>
                         </td>
                         <td class="text-right"> 
-                           <a href title="Edit" [routerLink]="['add/' + row.User.id]" > <i class="icon-note"></i></a>
+                           <a href title="{{isAdmin()?'Edit':'View'}}" [routerLink]="['add/' + row.User.id]" > <i class="icon-{{isAdmin()?'note':'eye'}}"></i></a>
                         </td>
                      </tr>
                   </tbody>

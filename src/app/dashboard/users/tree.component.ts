@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./tree.component.scss']
 })
 export class TreeComponent implements OnInit {
-
+	
     public rowData : any = []; 
 	public p1:number = 1;
 	public id:any  = '';
@@ -24,7 +24,7 @@ export class TreeComponent implements OnInit {
 	public search : any = {};	
 	public user_income : any = {};
 
-	public genealogyLevel:Number = this.apiService.genealogyLevel;
+	//public genealogyLevel:Number = this.apiService.genealogyLevel;
 
 	constructor(private router: Router, private apiService : ApiService, private activatedRoute : ActivatedRoute) {
 	    const queryParams = this.activatedRoute.snapshot.queryParams;

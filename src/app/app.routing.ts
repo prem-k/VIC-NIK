@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Router, Routes, RouterModule } from '@angular/router';
 import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 // Import Containers
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './dashboard/login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 export const routes: Routes = [  
   {
@@ -30,10 +31,21 @@ export const routes: Routes = [
     }
   }, 
   {
+    path: '404',
+    component: NotfoundComponent,
+    data: {
+      title: '404 Not Found'
+    }
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full',
-  }
+  }/*,
+  { 
+    path: '**', 
+    redirectTo: '404' 
+  }*/
 ];
 
 
@@ -49,7 +61,15 @@ export const routes: Routes = [
   ],
   declarations: []
 })
-export class AppRoutesModule { };
+export class AppRoutesModule { 
+
+  constructor(private router: Router) { 
+    this.router.errorHandler = (error: any) => { 
+        this.router.navigate(['404']); // or redirect to default route
+    } 
+  }
+
+};
 
 /*export const routing = RouterModule.forRoot(routes,{ useHash: true });
 

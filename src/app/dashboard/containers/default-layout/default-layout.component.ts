@@ -28,7 +28,7 @@ export class DefaultLayoutComponent implements OnInit {
 
     this.navItem = userNavItems;
 
-    if( this.isAdmin() ) {
+    if( this.isAdmin() ||  this.isModrator()) {
       this.navItem = adminNavItems;
     }
 
@@ -56,8 +56,18 @@ export class DefaultLayoutComponent implements OnInit {
     }
   }
 
+  changeOfRoutes(event){
+    if(window.location.href.indexOf('tree') == -1){
+      this.apiService.genealogyLevel = 0;
+    }
+  }
+
   isAdmin(){
     return this.apiService.isAdmin();
+  }
+
+  isModrator  (){
+    return this.apiService.isModrator ();
   }
 
   logginAs(){

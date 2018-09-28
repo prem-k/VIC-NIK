@@ -29,7 +29,7 @@
                <table class="table table-responsive-sm table-hover table-outline mb-0">
                   <thead>
                      <tr>
-                        <th>Name</th>
+                        <!-- <th>Name</th> -->
                         <th>Image</th>
                         <th width="150px">Mark Default</th>
                         <th>Action</th>
@@ -37,8 +37,8 @@
                   </thead>
                   <tbody>                     
                      <tr *ngFor="let row of rowData | paginate: { itemsPerPage: limit, currentPage: p1, id: 'my_pagination', totalItems: total_records }">
-                        <td>{{row.PopupPost.title}}</td>
-                        <td><img width="120" [src]="row.PopupPost.image_path"></td>
+                        <!-- <td>{{row.PopupPost.title}}</td> -->
+                        <td align="center"><img width="120" [src]="row.PopupPost.image_path"></td>
                         <td width="150px">
                            <select [(ngModel)]="row.PopupPost.status" name="defaultPost_{{row.PopupPost.id}}" id="defaultPost_{{row.PopupPost.id}}" class="form-control" (change)="markDefaultFn(row.PopupPost.id,row.PopupPost.status)">
                                 <option value="1">Active</option>

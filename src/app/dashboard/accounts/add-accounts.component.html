@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="account_number" class="form-control-label">Account Number</label>
-                            <input type="number" [(ngModel)]="form.account_number" name="account_number" id="name" placeholder="Account Number" class="form-control" #account_number="ngModel" required>
+                            <input type="text" [(ngModel)]="form.account_number" name="account_number" id="name" placeholder="Account Number" class="form-control" #account_number="ngModel" required>
                             <div *ngIf="f.submitted && account_number.invalid" [ngClass]="{ 'is-invalid': f.submitted && account_number.invalid }">
                                 <div *ngIf="account_number.errors.required" class="error">Account Number is required</div>
                             </div>

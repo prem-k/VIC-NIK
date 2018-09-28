@@ -14,7 +14,7 @@
                     <li class="director-first-li">
                       <a><span>Victory</span></a>
                       <ul class="subdirector child-sec">
-                        <li class="user-kyc subdirector-one"><a><span>KYC</span></a></li>
+                        <li class="user-kyc__ subdirector-one__"><a><span>KYC</span></a></li>
                       </ul>
                       <ul class="subdirector">
                         <li class="user-kyc-status">
@@ -27,15 +27,15 @@
                           </a>
                         </li>
                       </ul>
-                      <div class="white-border"></div>
+                      <!-- <div class="white-border"></div> -->
                       <ul class="departments cf">
-                        <li class="pro-first-name"><a><span>{{profile.User.first_name}}</span></a></li>
-                        <li class="department dep-b">
+                        <li class="pro-first-name__"><a><span>{{profile.User.first_name}}</span></a></li>
+                        <!-- <li class="department dep-b">
                           <a><span>{{profile.User.u_id}}</span></a>
                         </li>
                         <li class="department dep-a">
                           <a><span>{{getPost(profile.User.designation)}}</span></a>
-                        </li>
+                        </li> -->
                         <!-- <li class="department dep-c">
                             <a><span>{{profile.User.designation}}</span></a>
                             <ul class="sections">
@@ -43,7 +43,7 @@
                                 <li class="section"><a><span>Section A2</span></a></li>
                             </ul>
                         </li> -->
-                        <li class="department" [ngClass]="profile.UserKyc.status==1?'green':'red'">
+                        <!-- <li class="department" [ngClass]="profile.UserKyc.status==1?'green':'red'">
                           <a>
                             <span>Pan No. {{profile.UserKyc.pan_card_number}}<br>
                                     Aadhar No. {{profile.UserKyc.aadhar_card_number}}<br>
@@ -54,7 +54,7 @@
                         <li class="department" [ngClass]="profile.UserBankAccount.status==1?'green':'red'">
                           <a><span>Bank Account {{profile.UserBankAccount.account_number}}<br>
                           {{profile.UserBankAccount.status==1?'Approved':'Pending'}}</span></a>
-                        </li>
+                        </li> -->
                       </ul>
                     </li>
                   </ul>

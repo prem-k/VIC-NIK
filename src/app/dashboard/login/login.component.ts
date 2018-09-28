@@ -22,22 +22,7 @@ export class LoginComponent {
 
 
 	constructor(private router: Router, private apiService : ApiService,
-	 private activatedRoute : ActivatedRoute) {
-	  
-		   const queryParams = this.activatedRoute.snapshot.queryParams;
-	       let logout = queryParams.logout;
-	       if(logout === 'true'){
-	          	localStorage.removeItem('access_token');
-	          	localStorage.clear();
-	          	this.router.navigate([], {
-					  relativeTo: this.activatedRoute,
-					  queryParams: {
-					    logout: null
-					  }
-				});
-	       }
-
-		  
+	 private activatedRoute : ActivatedRoute) { 
 
 		this.activatedRoute.queryParams.subscribe(params => {      
 		    let fPasswordSent = params.fPasswordSent;
@@ -55,6 +40,23 @@ export class LoginComponent {
 					});
 				}, 3000);
 			}
+
+			let logout = params.logout;
+		    if(logout === 'true'){
+	          	localStorage.removeItem('access_token');
+	          	localStorage.clear();
+	          	this.router.navigate([], {
+					  relativeTo: this.activatedRoute,
+					  queryParams: {
+					    logout: null
+					  }
+				});
+				var body = document.getElementsByTagName('body')[0];
+	    		body.classList.remove('header-fixed');
+	    		body.classList.remove('sidebar-lg-show');
+	    		body.classList.remove('sidebar-fixed');
+		    }
+
 		});
 
 		if(this.apiService.isLogin()){
@@ -71,7 +73,7 @@ export class LoginComponent {
 
 	ngOnInit() {
 
-	}
+	}	
 
 	ngDoCheck() {
 	    // check if values changes

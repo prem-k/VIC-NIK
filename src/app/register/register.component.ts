@@ -72,7 +72,8 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  saveData(){
+  saveData(){    
+
     this.errors = {};    
     let request = this.apiService.addUser();
     request.data = this.form;    
@@ -82,7 +83,7 @@ export class RegisterComponent implements OnInit {
         this.userIsRegister = true;
         this.registerUser = response.data.User;        
       }else{
-        this.errors = response.errors;
+        this.errors = response.errors;        
       }
     });
   }
@@ -101,7 +102,7 @@ export class RegisterComponent implements OnInit {
           this.form.sponsor_name = response.data.User.first_name;
         }
       }else{
-        this.errors = response.errors;
+        this.errors = response.errors;        
       }
     });
   }

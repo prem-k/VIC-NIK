@@ -173,7 +173,7 @@ ul a span{
 	clear: left;	
 }
 
-.departments:after{
+/*.departments:after{
 	content: "";
 	display: block;
 	position: absolute;
@@ -185,7 +185,7 @@ ul a span{
 	margin: 0 auto;
 	top: 130px;
 	left: 9.1%
-}
+}*/
 
 
 @media all and (max-width: 767px){
@@ -388,6 +388,6 @@ ul a span{
     height: 30px;
     border-left: 4px solid #000000;
     margin: 0 auto;
-    top: 66px;
+    top: 76px;
     left: 50%;
 }

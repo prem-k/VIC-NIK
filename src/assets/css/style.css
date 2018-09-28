@@ -264,7 +264,7 @@ div#preloader {
   left: 0;
   width: 100%;
   height: auto;
-  background: rgba(0, 0, 0, 0.40);
+  background: rgba(0, 0, 0, 1);
   z-index: 9;
 }
 
@@ -2482,12 +2482,6 @@ body{
     margin-top: 50px;
 }
 
-.back-image{
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../img/wallpaper_3.jpg);
-    background-size: cover;
-}
 
 .app-header{
   background: #AAD4E7 !important;
@@ -2510,6 +2504,13 @@ body{
     background-size: cover;
 }
 
+.before-login{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/wallpaper_5.jpg);
+    background-size: cover;
+}
+
 .app-header{
   /*background: #AAD4E7 !important;*/
   background-position: center;
@@ -2528,20 +2529,16 @@ body{
   margin: 38px 7px 0px 0 !important;
 }
 
-.back-image .card, .back-image .card p{
+.back-image .card, .before-login .card, .back-image .card p, .before-login .card p{
   background: rgba(0, 0, 0, 0.5) !important;
   padding: 7px 11px 9px 10px !important;
   color: #fff !important;
 }
 
-.back-image .card-header{
+.back-image .card-header, .before-login .card-header{
   background: rgba(0, 0, 0, 0.5) !important;
   padding: 7px 11px 9px 10px !important;
   color: #fff !important;
-}
-
-.back-image .card-body{
-
 }
 
 
@@ -2558,4 +2555,15 @@ body{
 .single-awesome-project{
   height: 256px;
   width: 350px
+}
+
+.sidebar{
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.sidebar .nav-link.active{
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+.ngx-pagination a, .ngx-pagination button {
+    color: #9bd3fd !important;
 }

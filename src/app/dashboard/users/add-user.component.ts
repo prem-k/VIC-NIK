@@ -52,7 +52,6 @@ export class AddUserComponent implements OnInit {
     }else{
       this.getState(this.form.country_id);
       this.form.user_role = 2;      
-      this.form.gender = 1;
       this.form.user_post = '3';
       this.form.gender = '1';
       this.id = '';
@@ -70,6 +69,10 @@ export class AddUserComponent implements OnInit {
     return this.apiService.isAdmin();
   }
 
+  isModrator(){
+    return this.apiService.isModrator();
+  }
+
   getSingleRecord(id){
     let request = this.apiService.getUser();
     if(this.isAdmin()){ 
@@ -79,13 +82,14 @@ export class AddUserComponent implements OnInit {
     this.apiService.submitRequest(request).subscribe( (res:any) => {
       let response =  this.apiService.parseResponse(res); 
       if(response.status == 'success'){
-        if(this.isAdmin()){           
+        if(this.isAdmin()){
           this.form = response.data[0].User;
           let parent_id = response.data[0].UserRelation[0].User.u_id;
           this.validateSponserId(parent_id);
           this.form.parent_u_id = parent_id;
         }else{
           this.form = response.data.User;
+          this.form.parent_u_id = response.data.UserRelation[0].User.u_id;
         }
         
         this.getState(this.form.country_id);

@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 import { ConfigService } from './config.service';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable(/*{
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class ApiService {
 	public pageLimit:number = 10; 
 	public baseUrl : any = '';
 	public uploadPath : any = '';
-	public genealogyLevel : Number = 0;
+	public genealogyLevel : any = 0; 
 
 	public successMsg:any = 'Record Save';
 
@@ -44,7 +45,7 @@ export class ApiService {
 						}
 					];
 
-  	constructor(private http : Http, private configService : ConfigService) {
+  	constructor(private router : Router, private http : Http, private configService : ConfigService) {
   		this.baseUrl = configService.apiUrl;
   		this.tdsCharge = this.configService.tdsCharge;
 		this.handlingCharge = this.configService.handlingCharge;
@@ -66,6 +67,14 @@ export class ApiService {
   	isAdmin(){
   		var type = parseInt(localStorage.getItem('type'),10);
   		if(type == 1){
+  			return true;
+  		}
+  		return false;
+  	}
+
+  	isModrator(){
+  		var type = parseInt(localStorage.getItem('type'),10);
+  		if(type == 3){
   			return true;
   		}
   		return false;
@@ -138,6 +147,10 @@ export class ApiService {
 		});
     	if(res){
     		let response = res.json();
+    		if(response.apiResponse && response.apiResponse.errors && 
+    			response.apiResponse.errors.access_error){
+    			this.router.navigate(["/dashboard"]);
+    		}
     		return response.apiResponse;
     	}
     	return {};

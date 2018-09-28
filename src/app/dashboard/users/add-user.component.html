@@ -3,14 +3,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="icon-note"></i>
-                    <strong>{{(id>0)?'Edit':'Add'}} User Profile</strong>
-                    <div class="float-right" *ngIf="isAdmin()">
+                    <i class="icon-{{isModrator()?'eye':'note'}}"></i>
+                    <strong *ngIf="!isModrator()">{{(id>0)?'Edit':'Add'}} User Profile</strong>
+                    <strong *ngIf="isModrator()">{{(id>0)?'View':'Add'}} User Profile</strong>
+                    <div class="float-right" *ngIf="isAdmin() || isModrator()">
                         <a title="Back" [routerLink]="['/dashboard/users']">
                             <button class="btn btn-success btn-primary">Back</button>
                         </a>
                     </div>
                 </div>
+                <fieldset disabled="{{isModrator()?'disabled':''}}">
                 <div class="card-body card-block">
                     <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate> 
                         <div class="form-group" *ngIf="isAdmin()">
@@ -71,7 +73,7 @@
                         </div>
                         <div class="form-group" *ngIf="isAdmin()">
                             <label for="parent_u_id" class="form-control-label">Sponsor ID</label>
-                            <input type="text" [disabled]="!isAdmin()" [(ngModel)]="form.parent_u_id" name="parent_u_id" id="parent_u_id" placeholder="Sponsor ID" class="form-control" #parent_u_id="ngModel" required (ngModelChange)="validateSponserId(form.parent_u_id)">
+                            <input type="text" [(ngModel)]="form.parent_u_id" name="parent_u_id" id="parent_u_id" placeholder="Sponsor ID" class="form-control" #parent_u_id="ngModel" required (change)="validateSponserId(form.parent_u_id)">
                             <div *ngIf="f.submitted && parent_u_id.invalid" [ngClass]="{ 'is-invalid': f.submitted && parent_u_id.invalid }">
                                 <div *ngIf="parent_u_id.errors.required" class="error">Sponsor ID is required</div>
                             </div>
@@ -169,12 +171,13 @@
                                 <option value="2">Inactive</option>
                             </select>
                         </div>                        
-                        <div class="card-footer">
+                        <div class="card-footer" *ngIf="!isModrator()">
                             <button type="reset" class="btn btn-primary btn-danger margin-right-15"><i class="fa fa-ban"></i> Reset</button>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
                         </div>
                     </form>
                 </div>
+            </fieldset>
             </div>
         </div>
     </div>

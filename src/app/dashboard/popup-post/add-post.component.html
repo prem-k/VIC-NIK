@@ -13,13 +13,13 @@
                 </div>
                 <div class="card-body card-block">
                     <form name="form" method="post" #f="ngForm" (ngSubmit)="f.form.valid && saveData()" novalidate>
-                        <div class="form-group">
+                       <!--  <div class="form-group">
                             <label for="title" class="form-control-label">Title</label>
                             <input type="text" [(ngModel)]="form.title" name="title" id="name" placeholder="Title" class="form-control" #title="ngModel" required>
                             <div *ngIf="f.submitted && title.invalid" [ngClass]="{ 'is-invalid': f.submitted && title.invalid }">
                                 <div *ngIf="title.errors.required" class="error">Title is required</div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label>Photo</label>
                             <input class="form-control" type="file" (change)="onFileChanged($event)" #fileInput accept="image/x-png,image/gif,image/jpeg">

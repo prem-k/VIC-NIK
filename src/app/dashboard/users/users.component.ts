@@ -39,6 +39,10 @@ export class UsersComponent implements OnInit {
     this.resetSearchInputs();
 	}
 
+  isAdmin(){
+    return this.apiService.isAdmin();
+  }
+
   resetSearchInputs(){
       this.searchText.u_id = '';
       //this.searchText.mobile_number = '';

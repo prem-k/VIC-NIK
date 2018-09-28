@@ -1,4 +1,4 @@
-<div class="back-image app-body">
+<div class="before-login app-body">
 <main class="main d-flex align-items-center register-form">
 <div class="container">    
     <div class="row">
@@ -38,7 +38,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-user"></i></span>
                             </div>
-                            <input type="text" [(ngModel)]="form.parent_u_id" name="parent_u_id" id="parent_u_id" placeholder="Sponsor ID" class="form-control" #parent_u_id="ngModel" required (ngModelChange)="validateSponserId(form.parent_u_id)">
+                            <input type="text" [(ngModel)]="form.parent_u_id" name="parent_u_id" id="parent_u_id" placeholder="Sponsor ID" class="form-control" #parent_u_id="ngModel" required (change)="validateSponserId(form.parent_u_id)">
                             <div *ngIf="f.submitted && parent_u_id.invalid" [ngClass]="{ 'is-invalid': f.submitted && parent_u_id.invalid }">
                                 <div *ngIf="parent_u_id.errors.required" class="error">Sponsor ID is required</div>
                             </div>
@@ -97,7 +97,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-user"></i></span>
                             </div>
-                            <input type="date" [(ngModel)]="form.date_of_birth" name="date_of_birth" id="date_of_birth" placeholder="Zip Code" class="form-control" #date_of_birth="ngModel" required>
+                            <input type="date" [(ngModel)]="form.date_of_birth" name="date_of_birth" id="date_of_birth" placeholder="D.O.B" class="form-control" #date_of_birth="ngModel" required>
                             <div *ngIf="f.submitted && date_of_birth.invalid" [ngClass]="{ 'is-invalid': f.submitted && date_of_birth.invalid }">
                                 <div *ngIf="date_of_birth.errors.required" class="error">D.O.B is required</div>
                             </div>

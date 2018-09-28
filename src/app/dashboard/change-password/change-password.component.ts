@@ -14,6 +14,8 @@ export class ChangePasswordComponent implements OnInit {
 	public passError:any = '';
 	public responseData : any = {};
 	public successMsg = '';
+	public passErrorLen : any = '';
+	public confirmError : any = '';
 
 	constructor(private router: Router, private apiService : ApiService, private activatedRoute : ActivatedRoute) {
 
